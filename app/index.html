@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Calender</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../node_modules/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="assets/app.css" />
+
+  <style type="text/css">
+    .day {
+      height: 5rem;
+      text-align: center;
+      border-bottom: 1px solid;
+      margin: .3rem;
+    }
+    
+    .holiday {
+      background: #03A9F4;
+      color: white;
+      border: 1px solid black;
+    }
+  </style>
+
+</head>
+
+<body ng-app="starterApp" layout="column" ng-controller="UserController as ul" ng-cloak>
+
+  <md-toolbar layout="row" layout-align="center center">
+    <md-button class="menu" hide-gt-sm ng-click="ul.toggleList()" aria-label="Show User List">
+      <md-icon md-svg-icon="menu"></md-icon>
+    </md-button>
+    <h1 style="font-family:Lobster;">Calender</h1>
+  </md-toolbar>
+
+
+  <md-content id="content" style="overflow-y: scroll;font-family:Raleway;">
+
+    <div layout="column" layout-wrap style="padding:5%;" layout padding>
+      <div style="text-align:center;margin-bottom:5rem;">
+        <h1 style="font-family:Lobster;">Year 2013</h1>
+      </div>
+      <div ng-repeat="it in ul.year2013" style=" margin-bottom:5rem;padding: 5rem;background: url('{{it.img}}');background-size:cover;">
+        <h1 style="font-family:Lobster;">{{::it.month}}</h1>
+        <div layout layout-wrap layout-padding>
+          <div flex="10" class="day" ng-repeat="day in it.days" layout-align="center center" ng-class="{'holiday': day.holidayInfo != null}"
+            ng-click="ul.onDayClick(day.id,$event)">
+
+            <div style="font-size:1.8rem;"> {{::day.date}}</div>
+            <div ng-if="day.holidayInfo" style="font-size:.8rem;"> {{::day.holidayInfo.name}} </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </md-content>
+
+  <script src="../node_modules/angular/angular.js"></script>
+  <script src="../node_modules/angular-animate/angular-animate.js"></script>
+  <script src="../node_modules/angular-aria/angular-aria.js"></script>
+  <script type="text/javascript" src="../node_modules/angular-material/angular-material.js"></script>
+
+  <script src="./src/users/Users.js"></script>
+  <script src="./src/users/UserController.js"></script>
+  <script src="./src/users/UserService.js"></script>
+
+  <script type="text/javascript">
+    angular
+              .module('starterApp', ['ngMaterial', 'users'])
+              .config(function($mdThemingProvider){
+
+                  // $mdIconProvider
+                  //     .defaultIconSet("./assets/svg/avatars.svg", 128)
+                  //     .icon("menu"       , "./assets/svg/menu.svg"        , 24)
+                  //     .icon("share"      , "./assets/svg/share.svg"       , 24)
+                  //     .icon("google_plus", "./assets/svg/google_plus.svg" , 512)
+                  //     .icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
+                  //     .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
+                  //     .icon("phone"      , "./assets/svg/phone.svg"       , 512);
+
+                      $mdThemingProvider.theme('default')
+                          .primaryPalette('brown')
+                          .accentPalette('red');
+
+              });
+  </script>
+
+</body>
+
+</html>
