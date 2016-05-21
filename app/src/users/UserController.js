@@ -26,7 +26,8 @@
     var id = 1;
     var holidayFlag = false;
     self.onDayClick = function (id,ev) {
-      
+      var temp = userService.getHolidaysDetails(id);
+      if(temp)
         $mdDialog.show({
           controller: DialogController,
           templateUrl: './src/users/view/holidayDetails.html',
@@ -34,7 +35,7 @@
           targetEvent: ev,
           clickOutsideToClose:true,
           fullscreen: true,
-          locals: { holiday: userService.getHolidaysDetails(id) },
+          locals: { holiday: temp }
         });
     };
     while (!done) {
