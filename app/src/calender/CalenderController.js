@@ -1,9 +1,9 @@
 (function(){
 
   angular
-       .module('users')
-       .controller('UserController', 
-          UserController
+       .module('calender')
+       .controller('CalenderController', 
+          CalenderController
        );
 
   /**
@@ -13,7 +13,7 @@
    * @param avatarsService
    * @constructor
    */
-  function UserController( userService, $mdDialog, $mdBottomSheet, $timeout, $log ) {
+  function CalenderController( calenderService, $mdDialog, $mdBottomSheet, $timeout, $log ) {
     var self = this;
 
     
@@ -25,12 +25,19 @@
     var currentMonth = 0;
     var id = 1;
     var holidayFlag = false;
+   
     self.onDayClick = function (id,ev) {
-      var temp = userService.getHolidaysDetails(id);
+      var temp = calenderService.getHolidaysDetails(id);
       if(temp)
         $mdDialog.show({
-          controller: DialogController,
-          templateUrl: './src/users/view/holidayDetails.html',
+          controller: function HolidayDetailsController($scope, $mdDialog,holiday) {
+              $scope.date = new Date(2013, holiday.month-1, holiday.date);
+              $scope.holiday = holiday;
+              $scope.cancel = function() {
+                $mdDialog.cancel();
+              };
+          },
+          templateUrl: './src/calender/view/holidayDetails.html',
           parent: angular.element(document.body),
           targetEvent: ev,
           clickOutsideToClose:true,
@@ -42,7 +49,7 @@
     // show whatever markup you want for each day  
       month.push({
               id : id,
-              holidayInfo : userService.getHolidaysDetails(id),
+              holidayInfo : calenderService.getHolidaysDetails(id),
               date : date.getDate(),
               month : date.getMonth()
             });
@@ -62,23 +69,13 @@
       if (date.getFullYear() > 2013) {    done = true;  }
     }
     console.log(self.year2013);
-     
-   
-
   }
-  function DialogController($scope, $mdDialog,holiday) {
-    console.log(holiday);
+  function HolidayDetailsController($scope, $mdDialog,holiday) {
     $scope.date = new Date(2013, holiday.month-1, holiday.date);
     $scope.holiday = holiday;
-  $scope.hide = function() {
-    $mdDialog.hide();
-  };
-  $scope.cancel = function() {
-    $mdDialog.cancel();
-  };
-  $scope.answer = function(answer) {
-    $mdDialog.hide(answer);
-  };
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
 }
   
   

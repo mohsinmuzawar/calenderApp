@@ -1,15 +1,15 @@
 (function(){
   'use strict';
 
-  angular.module('users')
-         .service('userService',UserService);
+  angular.module('calender')
+         .service('calenderService',CalenderService);
 
   /**
-   * Users DataService
+   * Calender DataService
    * Uses embedded, hard-coded data model; acts asynchronously to simulate
    * remote data service call(s).
    *
-   * @returns {{loadAll: Function}}
+   * @returns 
    * @constructor
    */
   
@@ -17,7 +17,7 @@
     //*************************************************************************************
     // Holiday List reference http://www.goachamber.org/html/joomdocs/GG1213-34-SII-OG.pdf
     //************************************************************************************
-  function UserService(){
+  function CalenderService(){
     this.selectedDay = null;
     
     this.holidaysList = [ 
@@ -27,12 +27,12 @@
       { name : "Holi" ,month :3, date: 27, dateId : 88 },
       { name : "Good Friday" ,month : 3 ,date: 29, dateId : 86 },
       { name : "Gudi Padva" ,month : 4 ,date: 11, dateId : 101},
-      { name : "Dr. Babasaheb Ambedkar Jayanti" ,month : 4 ,date: 14, dateId : 104},
+      { name : "Dr. Ambedkar Jayanti" ,month : 4 ,date: 14, dateId : 104},
       { name : "May Day" ,month : 5 ,date: 1, dateId : 121},
       { name : "Eid-Ul-Fitr*" ,month : 8 ,date: 9, dateId : 221},
       { name : "Independence Day" ,month : 8 ,date: 15, dateId : 227},
-      { name : "Ganesh Chaturthi (1st Day)" ,month : 9 ,date: 9, dateId : 252},
-      { name : "Ganesh Chaturthi (2nd Day)" ,month : 9 ,date: 10, dateId : 253},
+      { name : "Ganesh Chaturthi" ,month : 9 ,date: 9, dateId : 252},
+      { name : "Ganesh Chaturthi" ,month : 9 ,date: 10, dateId : 253},
       { name : "Gandhi Jayanti" ,month : 10 ,date: 2, dateId : 275},
       { name : "Dussehra (Vijaya Dashmi)" ,month : 10 ,date: 13, dateId : 286},
       { name : "Eid-Ul-Zuha (Bakri Id)*" ,month : 10 ,date: 14, dateId : 287},
@@ -42,6 +42,9 @@
       { name : "Christmas" ,month : 12, date: 25, dateId : 358}
     ];
     
+    this.getAllHolidays = function() {
+      return this.holidaysList;
+    }
    this.getHolidaysDetails =function(id) {
      var flag = true;
      var day = null;
@@ -57,26 +60,6 @@
       this.selectedDay = day;
       return day;
     }
-    this.checkForHoliday = function(id) {
-      var isHoliday = false;
-      var flag= true;
-      angular.forEach(this.holidaysList,function (data) {
-        if(flag) {
-           if(data.dateId == id){
-              isHoliday = true;
-              flag= false;
-          }
-        }
-       
-      });
-      return isHoliday;
-    }
- 
-
-    // Promise-based API
-  
-      
- 
   }
 
 })();
