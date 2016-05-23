@@ -27,17 +27,25 @@
       color: white;
       border: 1px solid black;
     }
-    h1{
+    
+    h1 {
       font-family: Lobster;
+    }
+    
+    .month {
+      box-shadow: 1px 1px 1px 1px #8E8888;
+      margin-bottom: 5rem;
+      padding: 5rem;
+      background-size: cover;
     }
   </style>
 
 </head>
 
-<body ng-app="starterApp" layout="column" ng-controller="CalenderController as ul" ng-cloak>
+<body ng-app="starterApp" layout="column" ng-controller="CalenderController as cal" ng-cloak>
 
   <md-toolbar layout="row" layout-align="center center">
-    
+
     <h1 style="font-family:Lobster;">Calender</h1>
   </md-toolbar>
 
@@ -48,11 +56,11 @@
       <div layout style="text-align:center;margin-bottom:5rem;">
         <h1 flex style="font-family:Lobster;">Year 2013</h1>
       </div>
-      <div ng-repeat="it in ul.year2013" style="box-shadow: 1px 1px 1px 1px #8E8888;margin-bottom:5rem;padding: 5rem;background: url('{{it.img}}');background-size:cover;">
+      <div ng-repeat="it in cal.calender" style="background: url('{{it.img}}');" class="month">
         <h1 style="font-family:Lobster;">{{::it.month}}</h1>
         <div layout layout-wrap layout-padding>
           <div flex="10" class="day" ng-repeat="day in it.days" layout-align="center center" ng-class="{'holiday': day.holidayInfo != null}"
-            ng-click="ul.onDayClick(day.id,$event)">
+            ng-click="cal.onDayClick(day.id,$event)">
 
             <div style="font-size:1.8rem;"> {{::day.date}}</div>
             <div ng-if="day.holidayInfo" style="font-size:.8rem;"> {{::day.holidayInfo.name}} </div>
@@ -60,7 +68,7 @@
         </div>
       </div>
     </div>
-    
+
   </md-content>
 
   <script src="../node_modules/angular/angular.js"></script>

@@ -19,7 +19,7 @@
     
     var date = new Date(2013, 0, 1);
     var done = false;
-    self.year2013 = [];
+    self.calender = [];
     var month = [];
     var month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     var currentMonth = 0;
@@ -59,7 +59,7 @@
       // end the loop if it is another year  
       if(currentMonth != date.getMonth()){
         
-        self.year2013.push({
+        self.calender.push({
           img : "./assets/images/" +month_names[currentMonth].toLowerCase()+".jpg",
           month : month_names[currentMonth],
           days : month});
@@ -68,7 +68,7 @@
       }
       if (date.getFullYear() > 2013) {    done = true;  }
     }
-    console.log(self.year2013);
+    console.log(self.calender);
   }
   function HolidayDetailsController($scope, $mdDialog,holiday) {
     $scope.date = new Date(2013, holiday.month-1, holiday.date);
