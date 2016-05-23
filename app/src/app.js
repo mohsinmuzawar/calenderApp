@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-     angular.module('starterApp', ['ngMaterial', 'calender'])
+     angular.module('calenderApp', ['ngMaterial', 'calender'])
               .config(function($mdThemingProvider){
                     $mdThemingProvider.theme('default')
                           .primaryPalette('brown')
