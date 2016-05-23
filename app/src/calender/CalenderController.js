@@ -25,7 +25,8 @@
     var currentMonth = 0;
     var id = 1;
     var holidayFlag = false;
-   
+    self.monthList = month_names;
+    self.selectedMonth = 0;
     self.onDayClick = function (id,ev) {
       var temp = calenderService.getHolidaysDetails(id);
       if(temp)
@@ -45,6 +46,13 @@
           locals: { holiday: temp }
         });
     };
+    self.changeMonth = function (flag) {
+      if(flag ==1 && self.selectedMonth <11 ){
+        self.selectedMonth++;
+      }else if(flag == 0 && self.selectedMonth != 0 ){
+        self.selectedMonth--;
+      }
+    }
     while (!done) {
     // show whatever markup you want for each day  
       month.push({
@@ -61,7 +69,7 @@
         
         self.calender.push({
           img : "./assets/images/" +month_names[currentMonth].toLowerCase()+".jpg",
-          month : month_names[currentMonth],
+          name : month_names[currentMonth],
           days : month});
           currentMonth ++;
         month = [];

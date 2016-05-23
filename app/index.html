@@ -10,56 +10,60 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
   <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../node_modules/angular-material/angular-material.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
   <link rel="stylesheet" href="assets/app.css" />
-
-  <style type="text/css">
-    .day {
-      height: 5rem;
-      text-align: center;
-      border-bottom: 1px solid;
-      margin: .3rem;
-    }
-    
-    .holiday {
-      background: #03A9F4;
-      color: white;
-      border: 1px solid black;
-    }
-    
-    h1 {
-      font-family: Lobster;
-    }
-    
-    .month {
-      box-shadow: 1px 1px 1px 1px #8E8888;
-      margin-bottom: 5rem;
-      padding: 5rem;
-      background-size: cover;
-    }
-  </style>
-
 </head>
 
 <body ng-app="starterApp" layout="column" ng-controller="CalenderController as cal" ng-cloak>
 
   <md-toolbar layout="row" layout-align="center center">
-
-    <h1 style="font-family:Lobster;">Calender</h1>
+    <h1>Calender 2013</h1>
   </md-toolbar>
 
 
-  <md-content id="content" style="overflow-y: scroll;font-family:Raleway;">
-
-    <div layout="column" layout-wrap style="padding:5%;" layout padding>
-      <div layout style="text-align:center;margin-bottom:5rem;">
-        <h1 flex style="font-family:Lobster;">Year 2013</h1>
-      </div>
-      <div ng-repeat="it in cal.calender" style="background: url('{{it.img}}');" class="month">
-        <h1 style="font-family:Lobster;">{{::it.month}}</h1>
+  <md-content id="content"  style="font-family:Raleway;overflow-y: scroll;min-height: 90vh;">
+    
+    <div layout style="padding:1% 10% 0 10%;" layout-align="center center">
+      <div flex>
+        </div>
+      <md-button class=" md-raised" ng-click="showVerticalCalender = true">
+          <md-tooltip>Vertical</md-tooltip>
+        <md-icon aria-label="alignVertical" style="color: #737373;font-size:1.2rem;"  md-font-icon="fa fa-arrows-v" ></md-icon>
+      </md-button>
+       <md-button class=" md-raised" ng-click="showVerticalCalender = false">
+         <md-tooltip>Horizontal</md-tooltip>
+        <md-icon aria-label="alignHorizontal" style="color: #737373;font-size:1.2rem;" md-font-icon="fa fa-arrows-h" ></md-icon>
+      </md-button>
+    </div>
+    <div ng-hide="showVerticalCalender"  class="fade" style="padding:1% 0 0 0;" layout layout-wrap layout-padding layout-align="center center">
+      <div flex="10" class="nav-icon" ng-click="cal.changeMonth(0)">
+          <md-icon aria-label="left" md-font-icon="fa fa-chevron-left" ></md-icon>
+        </div>
+       <div flex="80" style="background: url('{{cal.calender[cal.selectedMonth].img}}');" class="monthHorizontal">
+        <h1 style="font-family:Lobster;">{{cal.calender[cal.selectedMonth].name}}</h1>
         <div layout layout-wrap layout-padding>
-          <div flex="10" class="day" ng-repeat="day in it.days" layout-align="center center" ng-class="{'holiday': day.holidayInfo != null}"
+          <div flex="10" class="day" ng-repeat="day in cal.calender[cal.selectedMonth].days" layout-align="center center" ng-class="{'holiday': day.holidayInfo != null}"
+            ng-click="cal.onDayClick(day.id,$event)">
+
+            <div style="font-size:1.8rem;"> {{day.date}}</div>
+            <div ng-if="day.holidayInfo" style="font-size:.8rem;"> {{day.holidayInfo.name}} </div>
+          </div>
+        </div>
+      </div>
+      <div flex="10" layout-align="center center" class="nav-icon" ng-click="cal.changeMonth(1)">
+         
+          <md-icon aria-label="right" md-font-icon="fa fa-chevron-right" ></md-icon>
+        </div>
+      </div>
+    <div  class="fade" ng-show="showVerticalCalender" layout="column" layout-wrap style="padding:1% 10% 5% 10%;" layout padding>
+     
+     
+      <div  ng-repeat="month in cal.calender" style="background: url('{{month.img}}');" class="monthVertical">
+        <h1 style="font-family:Lobster;">{{::month.name}}</h1>
+        <div layout layout-wrap layout-padding>
+          <div flex="10" class="day" ng-repeat="day in month.days" layout-align="center center" ng-class="{'holiday': day.holidayInfo != null}"
             ng-click="cal.onDayClick(day.id,$event)">
 
             <div style="font-size:1.8rem;"> {{::day.date}}</div>
