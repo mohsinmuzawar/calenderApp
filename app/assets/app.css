@@ -40,6 +40,7 @@ md-toolbar h1 {
     }
     
     .monthHorizontal {
+      min-height: 70vh;
       box-shadow: 1px 1px 1px 1px #8E8888;
       margin-top: 1%;
       padding: 3rem 5rem 3rem 5rem;
