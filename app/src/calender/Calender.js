@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  // Prepare the 'users' module for subsequent registration of controllers and delegates
+  // Prepare the 'calender' module for subsequent registration of controllers and delegates
   angular.module('calender', [ 'ngMaterial' ]);
 
 

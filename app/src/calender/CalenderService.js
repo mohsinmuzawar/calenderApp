@@ -6,20 +6,16 @@
 
   /**
    * Calender DataService
-   * Uses embedded, hard-coded data model; acts asynchronously to simulate
-   * remote data service call(s).
-   *
-   * @returns 
-   * @constructor
    */
   
   
-    //*************************************************************************************
-    // Holiday List reference http://www.goachamber.org/html/joomdocs/GG1213-34-SII-OG.pdf
-    //************************************************************************************
   function CalenderService(){
     this.selectedDay = null;
     
+    
+    //*************************************************************************************
+    // Holiday List reference http://www.goachamber.org/html/joomdocs/GG1213-34-SII-OG.pdf
+    //************************************************************************************
     this.holidaysList = [ 
       { name : "Eid-Milad-Un-Nabi" ,month : 1, date: 25 , dateId : 25 },
       { name : "Republic Day" ,month : 1 ,date: 26 , dateId : 26},
@@ -42,9 +38,14 @@
       { name : "Christmas" ,month : 12, date: 25, dateId : 358}
     ];
     
+    // returns list of holidays 
     this.getAllHolidays = function() {
       return this.holidaysList;
     }
+    
+    // gets Holiday Details
+    // @params id 
+    // @returns holiday details if exists or else null
    this.getHolidaysDetails =function(id) {
      var flag = true;
      var day = null;
