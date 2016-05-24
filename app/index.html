@@ -40,7 +40,7 @@
       <div flex="15" class="nav-icon" ng-click="cal.changeMonth(0)">
           <md-icon aria-label="left" md-font-icon="fa fa-chevron-left" ></md-icon>
         </div>
-       <div flex="70" style="background: url('{{cal.calender[cal.selectedMonth].img}}');background-size:cover;" class="monthHorizontal">
+       <div flex="70" style="background: url('{{cal.calender[cal.selectedMonth].img}}');background-size:cover;height:63vh;" class="monthHorizontal">
         <h1 style="font-family:Lobster;">{{cal.calender[cal.selectedMonth].name}}</h1>
         <div layout layout-wrap layout-padding>
           <div flex="15" class="day" ng-repeat="day in cal.calender[cal.selectedMonth].days" layout-align="center center" ng-class="{'holiday': day.holidayInfo != null}"
